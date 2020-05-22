@@ -22,6 +22,6 @@ public class AlgorithmTest {
     }
 
     public static BufferedImage getOriginalImage() throws IOException {
-        return ImageIO.read(new File("images\\dragon.png"));
+        return ImageIO.read(new File("images\\dragon.jpg"));
     }
 }

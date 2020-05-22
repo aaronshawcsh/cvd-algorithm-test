@@ -11,7 +11,7 @@ public class ImageRGB {
 
         for(int i = 0; i < this.height; i++) {
             for(int j = 0; j < this.width; j++) {
-                this.image[i][j] = new PixelRGB(image.getRGB(i, j));
+                this.image[i][j] = new PixelRGB(image.getRGB(j, i)); //BufferedImage uses x, y co-ordinates instead of rows and columns :D
             }
         }
     }
