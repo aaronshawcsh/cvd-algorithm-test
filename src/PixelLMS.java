@@ -1,9 +1,9 @@
 import java.util.InputMismatchException;
 
 public class PixelLMS {
-    private int[] lms;
+    private double[] lms;
 
-    public PixelLMS(int[] lms) {
+    public PixelLMS(double[] lms) {
         initialize();
         setLMS(lms);
     }
@@ -13,17 +13,17 @@ public class PixelLMS {
     }
 
     public void initialize() {
-        this.lms = new int[3];
+        this.lms = new double[3];
     }
 
-    public void setLMS(int[] lms) throws InputMismatchException {
+    public void setLMS(double[] lms) throws InputMismatchException {
         if(lms.length != 3) throw new InputMismatchException();
         this.lms[0] = lms[0];
         this.lms[1] = lms[1];
         this.lms[2] = lms[2];
     }
 
-    public int[] getLMS() {
+    public double[] getLMS() {
         return this.lms;
     }
 }

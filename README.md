@@ -2,9 +2,9 @@
 a test of the algorithm designed to allow users with CVD to see better
 
 # the algorithm
-```step-1``` grab RGB data from original image
+```step-1``` grab RGB data from original image - IMPLEMENTED
 
-```step-2``` convert to LMS stimulus
+```step-2``` convert to LMS stimulus - IMPLEMENTED
 
 ```step-3``` apply required preparatory equations as mentioned in "An Interface to Support Color Blind Computer Users"
 

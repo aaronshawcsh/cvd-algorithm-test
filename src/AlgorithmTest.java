@@ -14,8 +14,8 @@ public class AlgorithmTest {
         }
         ImageRGB originalImageRGB = new ImageRGB(originalBufferedImage);
 
-        //step-2 UNIMPLEMENTED
-        //ImageLMS originalImageLMS = new ImageLMS(originalImageRGB);
+        //step-2
+        ImageLMS originalImageLMS = new ImageLMS(originalImageRGB);
 
         //step-3 UNIMPLEMENTED
         //ImageLMS cvdSimulatedImageLMS = ImageLMS.getCVDSimulatedImageLMS(originalImageLMS);

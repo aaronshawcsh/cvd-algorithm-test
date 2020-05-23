@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class ImageLMS {
@@ -6,7 +7,7 @@ public class ImageLMS {
 
     public ImageLMS(ImageRGB image) {
         initializePixels(image);
-        //C-LMS = T * C-RGB, where the elements of T are the LMS tristimulus values of the CRT primaries
+        writeLMS(image);
     }
 
     public ImageLMS(int height, int width) {
@@ -27,7 +28,32 @@ public class ImageLMS {
         }
     }
 
-    public void setPixel(int x, int y, int[] lms) {
+    public void writeLMS(ImageRGB image) {
+        //using LMS tristimulus values
+        final double[][] T = { {0.1992, 0.4112, 0.0742},
+                               {0.0353, 0.2226, 0.0574},
+                               {0.0185, 0.1231, 1.3550} };
+
+        //C-LMS = T * C-RGB, where the elements of T are the LMS tristimulus values of the CRT primaries
+        for(int i = 0; i < this.image.length; i++) {
+            for(int j = 0; j < this.image[0].length; j++) {
+                PixelRGB pixelRGB = image.getPixel(i, j); //imageRGB treats it as rows and columns :D
+                int[] rgb = pixelRGB.getRGB();
+                double[] lms = new double[3];
+
+                lms[0] = (T[0][0] * rgb[0]) + (T[0][1] * rgb[1]) + (T[0][2] * rgb[2]);
+
+                lms[1] = (T[1][0] * rgb[0]) + (T[1][1] * rgb[1]) + (T[1][2] * rgb[2]);
+
+                lms[2] = (T[2][0] * rgb[0]) + (T[2][1] * rgb[1]) + (T[2][2] * rgb[2]);
+
+                this.image[i][j].setLMS(lms);
+                System.out.println(Arrays.toString(this.image[i][j].getLMS()));
+            }
+        }
+    }
+
+    public void setPixel(int x, int y, double[] lms) {
         try {
             this.image[x][y].setLMS(lms);
         } catch(InputMismatchException e) {
@@ -83,10 +109,10 @@ public class ImageLMS {
         return dC;
     }
 
-    public static int[] getLMSDifference(ImageLMS C, ImageLMS c, int x, int y) {
-        int[] lmsDiff = new int[3];
+    public static double[] getLMSDifference(ImageLMS C, ImageLMS c, int x, int y) {
+        double[] lmsDiff = new double[3];
         PixelLMS CPixel = C.getPixel(x, y), cPixel = c.getPixel(x, y);
-        int[] CPixelLMS = CPixel.getLMS(), cPixelLMS = cPixel.getLMS();
+        double[] CPixelLMS = CPixel.getLMS(), cPixelLMS = cPixel.getLMS();
 
         lmsDiff[0] = CPixelLMS[0] - cPixelLMS[0];
         lmsDiff[1] = CPixelLMS[1] - cPixelLMS[1];
